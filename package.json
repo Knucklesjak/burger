@@ -1,0 +1,27 @@
+{
+  "name": "burger",
+  "version": "1.0.0",
+  "description": "1) Burger Madness is a restaurant app using utilizing MVC to show how relational databases can work. The skills used in this app are:\r \t* Node.js\r \t* Express\r \t* ORM\r \t* Handlebars\r \t* MySQL\r \t* Javascript\r \t* CSS\r \tThis is a full-stack app that uses MySQL database, Node and Express to query and route the data in the back-end, and Handlebars and Javascript to handle UX and generate HTML.",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mysql": "^2.15.0",
+    "require": "^2.4.20"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Knucklesjak/burger.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Knucklesjak/burger/issues"
+  },
+  "homepage": "https://github.com/Knucklesjak/burger#readme"
+}
