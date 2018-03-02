@@ -1,0 +1,10 @@
+
+{{!-- Takes the burger out of the devoured area --}}
+<li>
+	{{burger_name}}
+	{{#if devoured}}
+		<button class="change-devoured" data-id="{{id}}" data-newDevoured="{{devoured}}">
+			Devour!
+		</button>
+	{{/if}}
+</li>
