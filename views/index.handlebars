@@ -1,5 +1,79 @@
 <ul>
-    {{#each burgers}}
+   
+
+ <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2 class="text-center">Place Order</h2></div>
+                    <div class="panel-body">
+                        <form class="create-update-form" action="burgers/create" method="POST">
+                          <div class="form-group">
+                            <label for="ca">Burger Name:</label>
+                            <input type="text" id="ca" name="name">
+                          </div>
+
+                          <div class="form-group">
+                            <label for="slee">Order Status</label><br>
+                            <input type="radio" name="devoured" value="0" checked> Pick Up Order                            
+                            <input type="radio" name="devoured" value="1"> Order Picked Up<br>
+                          </div>
+
+                          <button type="submit" class="btn-primary">Place Order</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2 class="text-center">Pick Up Order</h2></div>
+                    <div class="panel-body">
+                        <ol>
+                          {{#each burgers}}
+                            {{#unless this.devoured}}
+                              <li>
+                                {{this.burger_name}}
+
+{{!--                                 <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+                                  <input type="hidden" name="devoured" value="true">
+                                  <button type="submit">Pick Up Order</button>
+                                </form> --}}
+                                {{> burgers/pickup-order}}
+                              </li>
+                            {{/unless}}
+                          {{/each}}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h2 class="text-center">Order Picked Up</h2></div>
+                    <div class="panel-body">
+                        <ol>
+                          {{#each burgers}}
+                            {{#if this.devoured}}
+                              <li>
+                                {{this.burger_name}}
+
+{{!--                                 <form action="burgers/update/{{this.id}}?_method=PUT" method="POST">
+                                  <input type="hidden" name="devoured" value="false">
+                                  <button type="submit">New Order</button>
+                                </form> --}}
+                                {{> burgers/order-pickedup}}
+                              </li>
+                            {{/if}}
+                          {{/each}}
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+{{!-- Original Index.handlebars coding. Saving If needed --}}
+{{!--     {{#each burgers}}
         {{#unless devoured}}
         {{>burgers/burger-block devoured=true}}
     {{/unless}}
@@ -15,3 +89,21 @@
     {{/if}}
   {{/each}}
 </ul>
+
+<h2>Add a Burger</h2>
+<form class="create-form">
+
+  <div class="form-group">
+    <label for="ca">Burger Name:</label>
+    <input type="text" id="ca" name="name">
+  </div>
+
+  <div class="form-group">
+    <label for="slee">Sleepy?</label><br>
+    <input type="radio" name="sleepy" value="1" checked> Hungry<br>
+    <input type="radio" name="sleepy" value="0"> Full
+  </div>
+
+  <button type="submit">Add a Burger</button>
+</form>
+ --}}

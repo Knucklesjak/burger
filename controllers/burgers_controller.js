@@ -8,6 +8,7 @@ var burger = require("../models/burger.js");
 // Calls on all burgers from the index Handlebars page
 router.get("/", function(req, res) {
 	burger.all(function(data) {
+		console.log(data)
 		var hbsObject = {
 			burgers: data
 		};
@@ -21,7 +22,7 @@ router.post("/api/burgers", function(req, res) {
 	burger.create([
 		"burger_name", "devoured"
 		], [
-		req.body.burger_name, req.body.devoured
+		req.body.name, req.body.burger
 		], function(result) {
 
 			res.json({ id: result.insertId });
