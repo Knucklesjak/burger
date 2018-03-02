@@ -1,5 +1,5 @@
 // Var to import ORM from ORM.js to create function that interacts with database
-var orm = require("../confi/orm.js");
+var orm = require("../config/orm.js");
 
 var burger = {
 	all: function(cb) {
