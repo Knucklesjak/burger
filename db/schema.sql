@@ -9,5 +9,6 @@ CREATE TABLE burgers
 	burger_name VARCHAR(255) NOT NULL,
 	devour BOOLEAN DEFAULT false,
 	date TIMESTAMP,
+	-- created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 	PRIMARY KEY (id)
 );
