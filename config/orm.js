@@ -20,23 +20,29 @@ function objToSql(ob) {
 	var arr = [];
 
 	for (var key in ob) {
-		var value = ob[key];
-
-		if (Object.hasOwnProperty.call(ob, key)) {
-
-			if (typeof value === "string" && value.indexOf(" ") >= 0) {
-				value = "'" + value + "'";
-			}
-
-			arr.push(key + "=" + value);
+		if (ob.hasOwnProperty(key)) {
+			array.push(key + "=" + ob[key]);
 		}
 	}
+
+
+	// 	var value = ob[key];
+
+	// 	if (Object.hasOwnProperty.call(ob, key)) {
+
+	// 		if (typeof value === "string" && value.indexOf(" ") >= 0) {
+	// 			value = "'" + value + "'";
+	// 		}
+
+	// 		arr.push(key + "=" + value);
+	// 	}
+	// }
 
 	return arr.toString();
 }
 
 // Object for all our SQL statement functions. 
-
+// ORM to shall all values in burger DB.
 var orm = {
 	all: function(tableInput, cb) {
 		var queryString = "SELECT * FROM " + tableInput + ";";
@@ -48,6 +54,7 @@ var orm = {
 		});
 	},
 
+// ORM to add values to burger DB. Cols = columns to insert values into. Vals = array of values to save in Cols
 	create: function(table, cols, vals, cb) {
 		console.log(table, cols, vals, cb);
 		var queryString = "INSERT INTO " + table; 
@@ -70,6 +77,8 @@ var orm = {
 		});
 	},
 
+
+// ORM to update the values of the burger DB
 	// (name: burger, devoured: true)
 	update: function(table, objColVals, condition, cb) {
 		var queryString = "UPDATE " + table;
@@ -88,6 +97,18 @@ var orm = {
       	cb(result);
     	});
 	}
+
+	// ORM to delete burger from DB
+	// delete: function (table, condition, callback) {
+	// 	var queryString = "DELETE FROM " + table;
+	// 	queryString += " WHERE ";
+	// 	queryString += condition;
+
+	// connection.query(queryString, function(err, res) {
+	// 	if(error) throw error; 
+	// 	cb(result);
+	// });
+	// }
 };
 
 // Export the orm object for the model (burger.js).
