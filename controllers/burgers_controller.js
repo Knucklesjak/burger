@@ -1,12 +1,10 @@
+
+// Routes that are needed by the app. Apps installed via NPM
 var express = require("express"); 
-
 var router = express.Router();
-
-// Import the model file - burger.js - to use the database functions.
-
 var burger = require("../models/burger.js"); 
 
-// Create the necessary routes and their logic where needed.
+
 // Calls on all burgers from the index Handlebars page
 router.get("/", function(req, res) {
 	burger.all(function(data) {
@@ -18,7 +16,7 @@ router.get("/", function(req, res) {
 	});
 });
 
-// Posts the new information onto the server
+// POST Route to add order to burger DB
 router.post("/api/burgers", function(req, res) {
 	burger.create([
 		"burger_name", "devoured"
@@ -30,7 +28,7 @@ router.post("/api/burgers", function(req, res) {
 		});
 	});
 
-// Put router to send stuff back to front end 
+// PUT Route to update the burger DB when order is picked up
 router.put("/api/burgers/:id", function(req, res) {
 	var condition = "id = " + req.params.id;
 
@@ -47,6 +45,16 @@ router.put("/api/burgers/:id", function(req, res) {
 		}
 	});
 });
+
+
+//DELTE Route to delete an order - Future use
+// router.delete('/burgers/delete/:id', function (request, result) {
+//     var condition = 'id = ' + request.params.id;
+
+//     burger.delete(condition, function () {
+//         result.redirect('/burgers');
+//     });
+// });
 
 // Export the routes to the main server at server.js
 
