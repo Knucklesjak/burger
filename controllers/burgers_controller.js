@@ -1,62 +1,49 @@
-
-// Routes that are needed by the app. Apps installed via NPM
-var express = require("express"); 
+/*
+Below are the routes which will be needed by the app
+*/
+var express = require('express');
 var router = express.Router();
-var burger = require("../models/burger.js"); 
+var burger = require('../models/burger.js');
 
+// Routes when user goes to the main page
+router.get('/', function (request, result) {
+	result.redirect('/burgers');
+});
 
-// Calls on all burgers from the index Handlebars page
-router.get("/", function(req, res) {
-	burger.all(function(data) {
-		console.log(data)
-		var hbsObject = {
-			burgers: data
-		};
+// Route to pull all order
+router.get('/burgers', function (request, result) {
+	burger.all(function (data) {
+		var hbsObject = { burgers: data };
 		console.log(hbsObject);
-		res.render("index", hbsObject);
+		result.render('index', hbsObject);
 	});
 });
 
-// POST Route to add order to burger DB
-router.post("/api/burgers", function(req, res) {
-	burger.create([
-		"burger_name", "devoured"
-		], [
-		req.body.name, req.body.burger
-		], function(result) {
-
-			res.json({ id: result.insertId });
-		});
-	});
-
-// PUT Route to update the burger DB when order is picked up
-router.put("/api/burgers/:id", function(req, res) {
-	var condition = "id = " + req.params.id;
-
-	console.log("condition", condition);
-
-	burger.update({
-		devoured: req.body.devoured
-	}, condition, function(result) {
-		if(result.changedRows === 0) {
-			// Show status 404 if no rows changed because user wouldn't exist
-		return res.status(404).end();
-		} else {
-			res.status(200).end();
-		}
+// Route to add an order to the burger database
+router.post('/burgers/create', function (request, result) {
+	burger.create(['burger_name', 'devoured'], [request.body.name, request.body.devoured], function () {
+		result.redirect('/burgers');
 	});
 });
 
+// Route to update burger databse when order picked up
+router.put('/burgers/update/:id', function (request, result) {
+	var condition = 'id = ' + request.params.id;
 
-//DELTE Route to delete an order - Future use
-// router.delete('/burgers/delete/:id', function (request, result) {
-//     var condition = 'id = ' + request.params.id;
+	console.log('condition', condition);
 
-//     burger.delete(condition, function () {
-//         result.redirect('/burgers');
-//     });
-// });
+	burger.update({ devoured: request.body.devoured }, condition, function () {
+		result.redirect('/burgers');
+	});
+});
 
-// Export the routes to the main server at server.js
+//Route to delete an order - Future use
+router.delete('/burgers/delete/:id', function (request, result) {
+	var condition = 'id = ' + request.params.id;
 
-module.exports = router; 
+	burger.delete(condition, function () {
+		result.redirect('/burgers');
+	});
+});
+
+module.exports = router;

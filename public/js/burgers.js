@@ -1,4 +1,4 @@
-// This will attach the handlers to the DOM after it is loaded
+// // This will attach the handlers to the DOM after it is loaded
 $(function() {
 	$(".change-devour").on("click", function(event) {
 		var id = $(this).data("id");
@@ -8,7 +8,7 @@ $(function() {
 			devour: newBurger
 		};
 
-		// Send the PUT request.
+// 		// Send the PUT request.
 		$.ajax("/api/burgers/" + id, {
 			type: "PUT",
 			data: newBurgerState
@@ -29,14 +29,14 @@ $(function() {
       burger: $("[name=burger]:checked").val().trim()
     };
 
-    // Send the POST request.
+//     // Send the POST request.
     $.ajax("/api/burgers", {
       type: "POST",
       data: newBurger
     }).then(
       function() {
         console.log("Created New Burger");
-        // Reload the page to get the updated list
+//         // Reload the page to get the updated list
         location.reload();
       }
     );
